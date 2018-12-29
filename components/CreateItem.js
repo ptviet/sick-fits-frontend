@@ -41,7 +41,6 @@ class CreateItem extends Component {
   };
 
   data = null;
-
   onFileChange = e => {
     e.preventDefault();
     const files = e.target.files;
@@ -68,34 +67,34 @@ class CreateItem extends Component {
     }
   }
 
+  onSubmit = async (e, createItemMutation) => {
+    e.preventDefault();
+    if (this.data != null) {
+      const uploadRes = await fetch(
+        'https://api.cloudinary.com/v1_1/ptviet/image/upload',
+        {
+          method: 'POST',
+          body: this.data
+        }
+      );
+      const file = await uploadRes.json();
+      await this.setState({
+        image: file.secure_url,
+        largeImage: file.eager[0].secure_url
+      });
+      const res = await createItemMutation();
+      Router.push({
+        pathname: '/item',
+        query: { id: res.data.createItem.id }
+      });
+    }
+  };
+
   render() {
     return (
       <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
         {(createItem, { loading, error }) => (
-          <Form
-            onSubmit={async e => {
-              e.preventDefault();
-              if (this.data != null) {
-                const uploadRes = await fetch(
-                  'https://api.cloudinary.com/v1_1/ptviet/image/upload',
-                  {
-                    method: 'POST',
-                    body: this.data
-                  }
-                );
-                const file = await uploadRes.json();
-                await this.setState({
-                  image: file.secure_url,
-                  largeImage: file.eager[0].secure_url
-                });
-                const res = await createItem();
-                Router.push({
-                  pathname: '/item',
-                  query: { id: res.data.createItem.id }
-                });
-              }
-            }}
-          >
+          <Form onSubmit={e => this.onSubmit(e, createItem)}>
             <ErrorMessage error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
               <img id="uploadPreview" />
