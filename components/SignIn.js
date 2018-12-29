@@ -30,7 +30,6 @@ class SignIn extends Component {
     await signinMutation();
     this.setState({
       email: '',
-      name: '',
       password: ''
     });
   };
