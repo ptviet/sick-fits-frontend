@@ -3,7 +3,6 @@ import { Mutation } from 'react-apollo';
 import Router from 'next/router';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
-import formatMoney from '../lib/formatMoney';
 import ErrorMessage from './ErrorMessage';
 
 const CREATE_ITEM_MUTATION = gql`
@@ -146,7 +145,7 @@ class CreateItem extends Component {
                   onChange={this.onChange}
                 />
               </label>
-              <button type="submit">Submit</button>
+              <button type="submit">Submit{loading && 'ting'}</button>
             </fieldset>
           </Form>
         )}
