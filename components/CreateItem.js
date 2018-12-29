@@ -124,7 +124,7 @@ class CreateItem extends Component {
                 />
               </label>
               <label htmlFor="price">
-                Price
+                Price (in cent)
                 <input
                   type="number"
                   id="price"
