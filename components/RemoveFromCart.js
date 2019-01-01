@@ -28,14 +28,33 @@ class RemoveFromCart extends Component {
     id: PropTypes.string.isRequired
   };
 
+  // Update the cache on the client to match the server
+  update = (cache, payload) => {
+    // Read the cache to get the item
+    const data = cache.readQuery({ query: CURRENT_USER_QUERY });
+    // Filter the deleted item out of the cart
+    data.me.cart = data.me.cart.filter(
+      item => item.id !== payload.data.removeFromCart.id
+    );
+    // Put the items back
+    cache.writeQuery({ query: CURRENT_USER_QUERY, data });
+  };
+
   render() {
     return (
       <Mutation
         mutation={REMOVE_FROM_CART_MUTATION}
         variables={{ id: this.props.id }}
-        // refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+        update={this.update}
+        optimisticResponse={{
+          __typename: 'Mutation',
+          removeFromCart: {
+            __typename: 'CartItem',
+            id: this.props.id
+          }
+        }}
       >
-        {(removeFromCart, { error, loading }) => (
+        {(removeFromCart, { loading }) => (
           <BigButton
             title="Delete Item"
             onClick={() => {
