@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Item from './Item';
 import Pagination from './Pagination';
+import ErrorMessage from './ErrorMessage';
 import { perPage } from '../config';
 
 const ALL_ITEMS_QUERY = gql`
@@ -45,7 +46,7 @@ class Items extends Component {
         >
           {({ data, error, loading }) => {
             if (loading) return <p>Loading...</p>;
-            if (error) return <p>Error: {error.message}</p>;
+            if (error) return <ErrorMessage error={error} />;
             return (
               <ItemsList>
                 {data.items.map(item => (

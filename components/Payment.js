@@ -4,7 +4,6 @@ import Router from 'next/router';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import NProgress from 'nprogress';
-import ErrorMessage from './ErrorMessage';
 import User, { CURRENT_USER_QUERY } from './User';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import { stripe_publishable_key, paymentIcon } from '../config';
@@ -29,13 +28,20 @@ class Payment extends Component {
   };
 
   onToken = async (res, createOrderMutation) => {
+    NProgress.start();
     if (res.id) {
       const order = await createOrderMutation({
         variables: {
           token: res.id
         }
       }).catch(error => alert(error.message.replace('GraphQL error: ', '')));
-      console.log(order);
+      // Redirect
+      Router.push({
+        pathname: '/order',
+        query: {
+          id: order.data.createOrder.id
+        }
+      });
     }
   };
 
