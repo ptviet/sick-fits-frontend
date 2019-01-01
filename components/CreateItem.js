@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import ErrorMessage from './ErrorMessage';
+import { cloudinary } from '../config';
 
 const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
@@ -70,13 +71,10 @@ class CreateItem extends Component {
   onSubmit = async (e, createItemMutation) => {
     e.preventDefault();
     if (this.data != null) {
-      const uploadRes = await fetch(
-        'https://api.cloudinary.com/v1_1/ptviet/image/upload',
-        {
-          method: 'POST',
-          body: this.data
-        }
-      );
+      const uploadRes = await fetch(cloudinary, {
+        method: 'POST',
+        body: this.data
+      });
       const file = await uploadRes.json();
       await this.setState({
         image: file.secure_url,
