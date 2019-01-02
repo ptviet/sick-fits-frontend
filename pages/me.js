@@ -1,3 +1,12 @@
-import Items from './index';
+import MyAccount from '../components/MyAccount';
+import PleaseSignin from '../components/PleaseSignin';
 
-export default Items;
+const Me = props => (
+  <div>
+    <PleaseSignin>
+      <MyAccount />
+    </PleaseSignin>
+  </div>
+);
+
+export default Me;

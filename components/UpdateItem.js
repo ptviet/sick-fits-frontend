@@ -47,7 +47,7 @@ class UpdateItem extends Component {
 
   onSubmit = async (e, updateItemMutation) => {
     e.preventDefault();
-    const res = await updateItemMutation({
+    await updateItemMutation({
       variables: {
         id: this.props.id,
         ...this.state

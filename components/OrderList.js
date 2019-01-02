@@ -47,49 +47,49 @@ class OrderList extends Component {
             <div>
               <h2>
                 You have {orders.length} order{orders.length > 1 && 's'}
-                <OrderUL>
-                  {orders.map(order => (
-                    <OrderItemStyles key={order.id}>
-                      <Link
-                        href={{
-                          pathname: '/order',
-                          query: { id: order.id }
-                        }}
-                      >
-                        <a>
-                          <div className="order-meta">
-                            <p>{format(order.createdAt, 'DD/MM/YYYY')}</p>
-                            {/* <p>
+              </h2>
+              <OrderUL>
+                {orders.map(order => (
+                  <OrderItemStyles key={order.id}>
+                    <Link
+                      href={{
+                        pathname: '/order',
+                        query: { id: order.id }
+                      }}
+                    >
+                      <a>
+                        <div className="order-meta">
+                          <p>{format(order.createdAt, 'DD/MM/YYYY')}</p>
+                          {/* <p>
                               {'('}
                               {formatDistance(order.createdAt, new Date())}
                               {')'}
                             </p> */}
-                            <p>
-                              {order.items.reduce((a, b) => a + b.quantity, 0)}
-                              {' Items'}
-                            </p>
-                            <p>
-                              {order.items.length}
-                              {' Product'}
-                              {order.items.length > 1 && 's'}
-                            </p>
-                            <p>{formatMoney(order.total)}</p>
-                          </div>
-                          <div className="images">
-                            {order.items.map(item => (
-                              <img
-                                key={item.id}
-                                src={item.image}
-                                alt={item.title}
-                              />
-                            ))}
-                          </div>
-                        </a>
-                      </Link>
-                    </OrderItemStyles>
-                  ))}
-                </OrderUL>
-              </h2>
+                          <p>
+                            {order.items.reduce((a, b) => a + b.quantity, 0)}
+                            {' Items'}
+                          </p>
+                          <p>
+                            {order.items.length}
+                            {' Product'}
+                            {order.items.length > 1 && 's'}
+                          </p>
+                          <p>{formatMoney(order.total)}</p>
+                        </div>
+                        <div className="images">
+                          {order.items.map(item => (
+                            <img
+                              key={item.id}
+                              src={item.image}
+                              alt={item.title}
+                            />
+                          ))}
+                        </div>
+                      </a>
+                    </Link>
+                  </OrderItemStyles>
+                ))}
+              </OrderUL>
             </div>
           );
         }}
