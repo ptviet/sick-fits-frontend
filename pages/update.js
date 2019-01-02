@@ -1,8 +1,11 @@
 import UpdateItem from '../components/UpdateItem';
+import PleaseSignin from '../components/PleaseSignin';
 
 const Update = props => (
   <div>
-    <UpdateItem id={props.query.id} />
+    <PleaseSignin>
+      <UpdateItem id={props.query.id} />
+    </PleaseSignin>
   </div>
 );
 

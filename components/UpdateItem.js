@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
+import User from './User';
 import ErrorMessage from './ErrorMessage';
 
 const SINGLE_ITEM_QUERY = gql`
@@ -11,6 +12,9 @@ const SINGLE_ITEM_QUERY = gql`
       title
       description
       price
+      user {
+        id
+      }
     }
   }
 `;
@@ -57,61 +61,73 @@ class UpdateItem extends Component {
 
   render() {
     return (
-      <Query query={SINGLE_ITEM_QUERY} variables={{ id: this.props.id }}>
-        {({ data, loading }) => {
-          if (loading) return <p>Loading...</p>;
-          if (!data.item) return <p>No Item Found.</p>;
+      <User>
+        {({ data: { me } }) => {
+          if (!me) return <p>Please login.</p>;
           return (
-            <Mutation mutation={UPDATE_ITEM_MUTATION} variables={this.state}>
-              {(updateItem, { loading, error }) => (
-                <Form onSubmit={e => this.onSubmit(e, updateItem)}>
-                  <ErrorMessage error={error} />
-                  <fieldset disabled={loading} aria-busy={loading}>
-                    <label htmlFor="title">
-                      Title
-                      <input
-                        type="text"
-                        id="title"
-                        name="title"
-                        placeholder="Title"
-                        defaultValue={data.item.title}
-                        required
-                        onChange={this.onChange}
-                      />
-                    </label>
-                    <label htmlFor="price">
-                      Price
-                      <input
-                        type="number"
-                        id="price"
-                        name="price"
-                        placeholder="Price"
-                        defaultValue={data.item.price}
-                        required
-                        onChange={this.onChange}
-                      />
-                    </label>
-                    <label htmlFor="description">
-                      Description
-                      <textarea
-                        id="description"
-                        name="description"
-                        placeholder="Description"
-                        defaultValue={data.item.description}
-                        required
-                        onChange={this.onChange}
-                      />
-                    </label>
-                    <button type="submit">
-                      Sav{loading ? 'ing' : 'e'} Changes
-                    </button>
-                  </fieldset>
-                </Form>
-              )}
-            </Mutation>
+            <Query query={SINGLE_ITEM_QUERY} variables={{ id: this.props.id }}>
+              {({ data, loading }) => {
+                if (loading) return <p>Loading...</p>;
+                if (!data.item) return <p>No Item Found.</p>;
+                if (data.item.user.id !== me.id)
+                  return <p>You do not own this item.</p>;
+                return (
+                  <Mutation
+                    mutation={UPDATE_ITEM_MUTATION}
+                    variables={this.state}
+                  >
+                    {(updateItem, { loading, error }) => (
+                      <Form onSubmit={e => this.onSubmit(e, updateItem)}>
+                        <ErrorMessage error={error} />
+                        <fieldset disabled={loading} aria-busy={loading}>
+                          <label htmlFor="title">
+                            Title
+                            <input
+                              type="text"
+                              id="title"
+                              name="title"
+                              placeholder="Title"
+                              defaultValue={data.item.title}
+                              required
+                              onChange={this.onChange}
+                            />
+                          </label>
+                          <label htmlFor="price">
+                            Price
+                            <input
+                              type="number"
+                              id="price"
+                              name="price"
+                              placeholder="Price"
+                              defaultValue={data.item.price}
+                              required
+                              onChange={this.onChange}
+                            />
+                          </label>
+                          <label htmlFor="description">
+                            Description
+                            <textarea
+                              id="description"
+                              name="description"
+                              placeholder="Description"
+                              defaultValue={data.item.description}
+                              required
+                              onChange={this.onChange}
+                            />
+                          </label>
+                          <button type="submit">
+                            Sav{loading ? 'ing' : 'e'} Changes
+                          </button>
+                        </fieldset>
+                      </Form>
+                    )}
+                  </Mutation>
+                );
+              }}
+            </Query>
           );
         }}
-      </Query>
+      </User>
     );
   }
 }

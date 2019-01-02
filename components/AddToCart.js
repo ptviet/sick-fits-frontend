@@ -21,7 +21,14 @@ class AddToCart extends Component {
         refetchQueries={[{ query: CURRENT_USER_QUERY }]}
       >
         {(addToCart, { loading }) => (
-          <button onClick={addToCart} disabled={loading}>
+          <button
+            onClick={() =>
+              addToCart().catch(error =>
+                alert(error.message.replace('GraphQL error: ', ''))
+              )
+            }
+            disabled={loading}
+          >
             Add{loading ? 'ing' : ' To Cart'} 🛒
           </button>
         )}
