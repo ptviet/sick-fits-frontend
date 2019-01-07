@@ -4,7 +4,8 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import ErrorMessage from './ErrorMessage';
-import { CLOUDINARY } from '../config';
+// import { CLOUDINARY } from '../config';
+import { ALL_ITEMS_QUERY } from './Items';
 
 const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
@@ -96,7 +97,11 @@ class CreateItem extends Component {
 
   render() {
     return (
-      <Mutation mutation={CREATE_ITEM_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={CREATE_ITEM_MUTATION}
+        variables={this.state}
+        refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
+      >
         {(createItem, { loading, error }) => (
           <Form onSubmit={e => this.onSubmit(e, createItem)}>
             <ErrorMessage error={error} />
