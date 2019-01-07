@@ -12,21 +12,18 @@ exports[`<CreateItem /> should render and match the snapshot 1`] = `
     aria-busy={false}
     disabled={false}
   >
-    <img
-      alt="Upload Preview"
-      id="uploadPreview"
-    />
     <label
-      htmlFor="file"
+      htmlFor="image"
     >
       Image
       <input
-        id="file"
-        name="file"
+        id="image"
+        name="image"
         onChange={[Function]}
-        placeholder="Upload an image"
+        placeholder="Image Link"
         required={true}
-        type="file"
+        type="text"
+        value=""
       />
     </label>
     <label

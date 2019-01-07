@@ -54,15 +54,21 @@ class CreateItem extends Component {
 
   onSubmit = async (e, createItemMutation) => {
     e.preventDefault();
-    if (this.data != null) {
-      const uploadRes = await fetch(CLOUDINARY, {
-        method: 'POST',
-        body: this.data
-      });
-      const file = await uploadRes.json();
+    // if (this.data != null) {
+    //   const uploadRes = await fetch(CLOUDINARY, {
+    //     method: 'POST',
+    //     body: this.data
+    //   });
+    //   const file = await uploadRes.json();
+    //   await this.setState({
+    //     image: file.secure_url,
+    //     largeImage: file.eager[0].secure_url
+    //   });
+    // }
+    const { image } = this.state;
+    if (image) {
       await this.setState({
-        image: file.secure_url,
-        largeImage: file.eager[0].secure_url
+        largeImage: image
       });
     }
     const res = await createItemMutation();
@@ -72,21 +78,21 @@ class CreateItem extends Component {
     });
   };
 
-  previewImage(file) {
-    if (file != null || file != undefined) {
-      const oFReader = new FileReader();
-      oFReader.readAsDataURL(file);
+  // previewImage(file) {
+  //   if (file) {
+  //     const oFReader = new FileReader();
+  //     oFReader.readAsDataURL(file);
 
-      oFReader.onload = oFREvent => {
-        document.getElementById('uploadPreview').src = oFREvent.target.result;
-        document.getElementById('uploadPreview').style = 'height: 100px';
-        document.getElementById('uploadPreview').hidden = false;
-      };
-    } else {
-      document.getElementById('uploadPreview').hidden = true;
-      this.data = null;
-    }
-  }
+  //     oFReader.onload = oFREvent => {
+  //       document.getElementById('uploadPreview').src = oFREvent.target.result;
+  //       document.getElementById('uploadPreview').style = 'height: 100px';
+  //       document.getElementById('uploadPreview').hidden = false;
+  //     };
+  //   } else {
+  //     document.getElementById('uploadPreview').hidden = true;
+  //     this.data = null;
+  //   }
+  // }
 
   render() {
     return (
@@ -95,7 +101,7 @@ class CreateItem extends Component {
           <Form onSubmit={e => this.onSubmit(e, createItem)}>
             <ErrorMessage error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
-              <img id="uploadPreview" alt="Upload Preview" />
+              {/* <img id="uploadPreview" alt="Upload Preview" />
               <label htmlFor="file">
                 Image
                 <input
@@ -105,6 +111,18 @@ class CreateItem extends Component {
                   placeholder="Upload an image"
                   required
                   onChange={this.onFileChange}
+                />
+              </label> */}
+              <label htmlFor="image">
+                Image
+                <input
+                  type="text"
+                  id="image"
+                  name="image"
+                  placeholder="Image Link"
+                  value={this.state.image}
+                  required
+                  onChange={this.onChange}
                 />
               </label>
               <label htmlFor="title">
