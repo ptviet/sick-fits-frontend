@@ -65,16 +65,6 @@ class SingleItem extends Component {
           const { item } = data;
           return (
             <>
-              <SingleItemStyles>
-                <Head>
-                  <title>Sick Fits | {item.title}</title>
-                </Head>
-                <img src={item.largeImage} alt={item.title} />
-                <div className="details">
-                  <h2>{item.title}</h2>
-                  <p>{item.description}</p>
-                </div>
-              </SingleItemStyles>
               <ButtonList>
                 <Link
                   href={{
@@ -87,6 +77,16 @@ class SingleItem extends Component {
                 <AddToCart id={item.id} />
                 <DeleteItem id={item.id}>Delete ❌</DeleteItem>
               </ButtonList>
+              <SingleItemStyles>
+                <Head>
+                  <title>Sick Fits | {item.title}</title>
+                </Head>
+                <img src={item.largeImage} alt={item.title} />
+                <div className="details">
+                  <h2>{item.title}</h2>
+                  <p>{item.description}</p>
+                </div>
+              </SingleItemStyles>
             </>
           );
         }}
