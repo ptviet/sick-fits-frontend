@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Order/> should render and match snapshot 1`] = `
+<div
+  className="OrderStyles-sc-4oqalm-0 camMij"
+  data-test="order"
+>
+  <SideEffect(Head)>
+    <Head />
+  </SideEffect(Head)>
+  <p>
+    <span>
+      Order ID:
+    </span>
+    <span>
+      ord123
+    </span>
+  </p>
+  <p>
+    <span>
+      Charge:
+    </span>
+    <span>
+      ch_123
+    </span>
+  </p>
+  <p>
+    <span>
+      Date:
+    </span>
+    <span>
+      91/04/2018 10:04 
+    </span>
+  </p>
+  <p>
+    <span>
+      Total Item:
+    </span>
+    <span>
+      2
+    </span>
+  </p>
+  <p>
+    <span>
+      Total Amount:
+    </span>
+    <span>
+      $400
+    </span>
+  </p>
+  <div
+    className="items"
+  >
+    <OrderItem
+      item={
+        Object {
+          "__typename": "OrderItem",
+          "description": "modi tenetur amet modi reprehenderit omnis adipisci",
+          "id": "3a430a73-c9e9-4bcc-b46a-41618965ffea",
+          "image": "reprehenderit.jpg",
+          "largeImage": "soluta.jpg",
+          "price": 4234,
+          "quantity": 1,
+          "title": "non omnis consequatur enim quia autem et",
+          Symbol(id): "OrderItem:3a430a73-c9e9-4bcc-b46a-41618965ffea",
+        }
+      }
+      key="3a430a73-c9e9-4bcc-b46a-41618965ffea"
+    >
+      <div
+        className="order-item"
+      >
+        <img
+          alt="non omnis consequatur enim quia autem et"
+          src="reprehenderit.jpg"
+        />
+        <div
+          className="item-details"
+        >
+          <h2>
+            non omnis consequatur enim quia autem et
+          </h2>
+          <p>
+            Qty: 
+            1
+          </p>
+          <p>
+            Each: 
+            $42.34
+          </p>
+          <p>
+            Subtotal: 
+            $42.34
+          </p>
+          <p>
+            Description: 
+            modi tenetur amet modi reprehenderit omnis adipisci
+          </p>
+        </div>
+      </div>
+    </OrderItem>
+    <OrderItem
+      item={
+        Object {
+          "__typename": "OrderItem",
+          "description": "molestias assumenda quasi adipisci mollitia iste itaque",
+          "id": "293e0904-82fd-403e-a08d-8d81098deec8",
+          "image": "quia.jpg",
+          "largeImage": "sed.jpg",
+          "price": 4234,
+          "quantity": 1,
+          "title": "exercitationem omnis laborum exercitationem est sapiente laudantium",
+          Symbol(id): "OrderItem:293e0904-82fd-403e-a08d-8d81098deec8",
+        }
+      }
+      key="293e0904-82fd-403e-a08d-8d81098deec8"
+    >
+      <div
+        className="order-item"
+      >
+        <img
+          alt="exercitationem omnis laborum exercitationem est sapiente laudantium"
+          src="quia.jpg"
+        />
+        <div
+          className="item-details"
+        >
+          <h2>
+            exercitationem omnis laborum exercitationem est sapiente laudantium
+          </h2>
+          <p>
+            Qty: 
+            1
+          </p>
+          <p>
+            Each: 
+            $42.34
+          </p>
+          <p>
+            Subtotal: 
+            $42.34
+          </p>
+          <p>
+            Description: 
+            molestias assumenda quasi adipisci mollitia iste itaque
+          </p>
+        </div>
+      </div>
+    </OrderItem>
+  </div>
+</div>
+`;

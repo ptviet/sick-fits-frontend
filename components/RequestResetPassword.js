@@ -64,3 +64,4 @@ class RequestResetPassword extends Component {
 }
 
 export default RequestResetPassword;
+export { REQUEST_RESET_PASSWORD_MUTATION };

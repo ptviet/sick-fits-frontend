@@ -92,3 +92,4 @@ class SignUp extends Component {
 }
 
 export default SignUp;
+export { SIGNUP_MUTATION };

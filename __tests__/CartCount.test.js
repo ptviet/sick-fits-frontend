@@ -1,7 +1,6 @@
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import CartCount from '../components/CartCount';
-import { fakeItem } from '../lib/testUtils';
 
 describe('<CartCount />', () => {
   let wrapper;

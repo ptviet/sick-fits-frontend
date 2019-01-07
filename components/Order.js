@@ -46,7 +46,7 @@ class Order extends Component {
           const { order } = data;
           if (!order) return <p>Not Found</p>;
           return (
-            <OrderStyles>
+            <OrderStyles data-test="order">
               <Head>
                 <title>Sick Fits | View Order</title>
               </Head>
@@ -84,3 +84,4 @@ class Order extends Component {
 }
 
 export default Order;
+export { SINGLE_ORDER_QUERY };

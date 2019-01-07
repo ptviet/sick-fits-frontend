@@ -35,38 +35,22 @@ class CreateItem extends Component {
     price: 0
   };
 
+  data = null;
+
   onChange = e => {
     const { name, type, value } = e.target;
     const val = type === 'number' ? parseFloat(Number(value)) : value;
     this.setState({ [name]: val });
   };
 
-  data = null;
   onFileChange = e => {
     e.preventDefault();
-    const files = e.target.files;
+    const { files } = e.target;
     this.data = new FormData();
     this.data.append('file', files[0]);
     this.data.append('upload_preset', 'sickfits');
     this.previewImage(files[0]);
   };
-
-  previewImage(file) {
-    if (file != null || file != undefined) {
-      var oFReader = new FileReader();
-      oFReader.readAsDataURL(file);
-
-      oFReader.onload = oFREvent => {
-        document.getElementById('uploadPreview').src = oFREvent.target.result;
-        document.getElementById('uploadPreview').alt = 'Upload Preview';
-        document.getElementById('uploadPreview').style = 'height: 100px';
-        document.getElementById('uploadPreview').hidden = false;
-      };
-    } else {
-      document.getElementById('uploadPreview').hidden = true;
-      this.data = null;
-    }
-  }
 
   onSubmit = async (e, createItemMutation) => {
     e.preventDefault();
@@ -80,13 +64,29 @@ class CreateItem extends Component {
         image: file.secure_url,
         largeImage: file.eager[0].secure_url
       });
-      const res = await createItemMutation();
-      Router.push({
-        pathname: '/item',
-        query: { id: res.data.createItem.id }
-      });
     }
+    const res = await createItemMutation();
+    Router.push({
+      pathname: '/item',
+      query: { id: res.data.createItem.id }
+    });
   };
+
+  previewImage(file) {
+    if (file != null || file != undefined) {
+      const oFReader = new FileReader();
+      oFReader.readAsDataURL(file);
+
+      oFReader.onload = oFREvent => {
+        document.getElementById('uploadPreview').src = oFREvent.target.result;
+        document.getElementById('uploadPreview').style = 'height: 100px';
+        document.getElementById('uploadPreview').hidden = false;
+      };
+    } else {
+      document.getElementById('uploadPreview').hidden = true;
+      this.data = null;
+    }
+  }
 
   render() {
     return (
@@ -95,7 +95,7 @@ class CreateItem extends Component {
           <Form onSubmit={e => this.onSubmit(e, createItem)}>
             <ErrorMessage error={error} />
             <fieldset disabled={loading} aria-busy={loading}>
-              <img id="uploadPreview" />
+              <img id="uploadPreview" alt="Upload Preview" />
               <label htmlFor="file">
                 Image
                 <input

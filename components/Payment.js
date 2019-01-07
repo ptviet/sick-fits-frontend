@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import NProgress from 'nprogress';
 import User, { CURRENT_USER_QUERY } from './User';
 import calcTotalPrice from '../lib/calcTotalPrice';
-import { stripe_publishable_key, paymentIcon } from '../config';
+import { stripePublishableKey, paymentIcon } from '../config';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($token: String!) {
@@ -23,9 +23,8 @@ const CREATE_ORDER_MUTATION = gql`
 `;
 
 class Payment extends Component {
-  totalItems = cart => {
-    return cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
-  };
+  totalItems = cart =>
+    cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
 
   onToken = async (res, createOrderMutation) => {
     NProgress.start();
@@ -48,32 +47,36 @@ class Payment extends Component {
   render() {
     return (
       <User>
-        {({ data: { me } }) => (
-          <Mutation
-            mutation={CREATE_ORDER_MUTATION}
-            refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-          >
-            {createOrder => (
-              <StripeCheckout
-                amount={calcTotalPrice(me.cart)}
-                name="Sick Fits"
-                description={`Order of ${this.totalItems(me.cart)} item${
-                  this.totalItems(me.cart) > 1 ? 's' : ''
-                }`}
-                image={paymentIcon}
-                stripeKey={stripe_publishable_key}
-                currency="AUD"
-                email={me.email}
-                token={res => this.onToken(res, createOrder)}
-              >
-                {this.props.children}
-              </StripeCheckout>
-            )}
-          </Mutation>
-        )}
+        {({ data: { me }, loading }) => {
+          if (loading) return <p>Loading...</p>;
+          return (
+            <Mutation
+              mutation={CREATE_ORDER_MUTATION}
+              refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+            >
+              {createOrder => (
+                <StripeCheckout
+                  amount={calcTotalPrice(me.cart)}
+                  name="Sick Fits"
+                  description={`Order of ${this.totalItems(me.cart)} item${
+                    this.totalItems(me.cart) > 1 ? 's' : ''
+                  }`}
+                  image={paymentIcon}
+                  stripeKey={stripePublishableKey}
+                  currency="AUD"
+                  email={me.email}
+                  token={res => this.onToken(res, createOrder)}
+                >
+                  {this.props.children}
+                </StripeCheckout>
+              )}
+            </Mutation>
+          );
+        }}
       </User>
     );
   }
 }
 
 export default Payment;
+export { CREATE_ORDER_MUTATION };

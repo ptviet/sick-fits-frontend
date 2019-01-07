@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OrderItem /> should render and match snapshot 1`] = `
+<div
+  className="order-item"
+>
+  <img
+    alt="non omnis consequatur enim quia autem et"
+    src="reprehenderit.jpg"
+  />
+  <div
+    className="item-details"
+  >
+    <h2>
+      non omnis consequatur enim quia autem et
+    </h2>
+    <p>
+      Qty: 
+      1
+    </p>
+    <p>
+      Each: 
+      $42.34
+    </p>
+    <p>
+      Subtotal: 
+      $42.34
+    </p>
+    <p>
+      Description: 
+      modi tenetur amet modi reprehenderit omnis adipisci
+    </p>
+  </div>
+</div>
+`;
