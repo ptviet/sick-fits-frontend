@@ -4,6 +4,8 @@ import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Head from 'next/head';
 import ErrorMessage from './ErrorMessage';
+import DeleteItem from './DeleteItem';
+import AddToCart from './AddToCart';
 
 const SingleItemStyles = styled.div`
   max-width: 1200px;
