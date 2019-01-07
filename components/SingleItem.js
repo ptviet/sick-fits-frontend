@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Head from 'next/head';
+import Link from 'next/link';
 import ErrorMessage from './ErrorMessage';
 import DeleteItem from './DeleteItem';
 import AddToCart from './AddToCart';
