@@ -27,6 +27,21 @@ const SingleItemStyles = styled.div`
   }
 `;
 
+const ButtonList = styled.div`
+  display: grid;
+  width: 100%;
+  border-top: 1px solid ${props => props.theme.lightgrey};
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-gap: 1px;
+  background: ${props => props.theme.lightgrey};
+  & > * {
+    background: white;
+    border: 0;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+`;
+
 const SINGLE_ITEM_QUERY = gql`
   query SINGLE_ITEM_QUERY($id: ID!) {
     item(where: { id: $id }) {
@@ -60,7 +75,7 @@ class SingleItem extends Component {
                   <p>{item.description}</p>
                 </div>
               </SingleItemStyles>
-              <div className="buttonList">
+              <ButtonList>
                 <Link
                   href={{
                     pathname: '/update',
@@ -71,7 +86,7 @@ class SingleItem extends Component {
                 </Link>
                 <AddToCart id={item.id} />
                 <DeleteItem id={item.id}>Delete ❌</DeleteItem>
-              </div>
+              </ButtonList>
             </>
           );
         }}
