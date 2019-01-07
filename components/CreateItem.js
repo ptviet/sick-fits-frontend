@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import ErrorMessage from './ErrorMessage';
+import { CLOUDINARY } from '../config';
 
 const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
@@ -54,7 +55,7 @@ class CreateItem extends Component {
   onSubmit = async (e, createItemMutation) => {
     e.preventDefault();
     if (this.data != null) {
-      const uploadRes = await fetch(process.env.CLOUDINARY, {
+      const uploadRes = await fetch(CLOUDINARY, {
         method: 'POST',
         body: this.data
       });

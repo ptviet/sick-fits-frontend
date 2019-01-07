@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 import NProgress from 'nprogress';
 import User, { CURRENT_USER_QUERY } from './User';
 import calcTotalPrice from '../lib/calcTotalPrice';
-import { paymentIcon } from '../config';
+import { paymentIcon, STRIPE_PUBLISHABLE_KEY } from '../config';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($token: String!) {
@@ -62,7 +62,7 @@ class Payment extends Component {
                     this.totalItems(me.cart) > 1 ? 's' : ''
                   }`}
                   image={paymentIcon}
-                  stripeKey={process.env.STRIPE_PUBLISHABLE_KEY}
+                  stripeKey={STRIPE_PUBLISHABLE_KEY}
                   currency="AUD"
                   email={me.email}
                   token={res => this.onToken(res, createOrder)}

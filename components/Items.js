@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import Item from './Item';
 import Pagination from './Pagination';
 import ErrorMessage from './ErrorMessage';
-
 import { perPage } from '../config';
 
 const ALL_ITEMS_QUERY = gql`
