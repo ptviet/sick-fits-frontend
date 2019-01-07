@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import Item from './Item';
 import Pagination from './Pagination';
 import ErrorMessage from './ErrorMessage';
-import { perPage } from '../config';
+
+import { perPage, endpointProd } from '../config';
 
 const ALL_ITEMS_QUERY = gql`
   query ALL_ITEMS_QUERY($first: Int = ${perPage}, $skip: Int = 0 ) {
@@ -34,6 +35,7 @@ const ItemsList = styled.div`
 
 class Items extends Component {
   render() {
+    console.log(endpointProd);
     return (
       <Center>
         <Pagination page={this.props.page} />
