@@ -55,6 +55,18 @@ class SingleItem extends Component {
                 <h2>{item.title}</h2>
                 <p>{item.description}</p>
               </div>
+              <div className="buttonList">
+                <Link
+                  href={{
+                    pathname: '/update',
+                    query: { id: item.id }
+                  }}
+                >
+                  <a>Edit ✏️</a>
+                </Link>
+                <AddToCart id={item.id} />
+                <DeleteItem id={item.id}>Delete ❌</DeleteItem>
+              </div>
             </SingleItemStyles>
           );
         }}
