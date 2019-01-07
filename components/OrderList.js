@@ -59,7 +59,11 @@ class OrderList extends Component {
                     >
                       <a>
                         <div className="order-meta">
-                          <p>{format(order.createdAt, 'DD/MM/YYYY')}</p>
+                          <p>
+                            {format(order.createdAt, 'DD/MM/YYYY', {
+                              awareOfUnicodeTokens: true
+                            })}
+                          </p>
                           {/* <p>
                               {'('}
                               {formatDistance(order.createdAt, new Date())}
