@@ -8,7 +8,7 @@ import ErrorMessage from './ErrorMessage';
 import { perPage } from '../config';
 
 const ALL_ITEMS_QUERY = gql`
-  query ALL_ITEMS_QUERY($first: Int = ${perPage} || 6, $skip: Int = 0 ) {
+  query ALL_ITEMS_QUERY($first: Int = ${perPage}, $skip: Int = 0 ) {
     items(first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
       title
