@@ -50,6 +50,6 @@ describe('<Nav />', () => {
     wrapper.update();
 
     const nav = wrapper.find('ul');
-    expect(nav.children().length).toBe(6);
+    expect(nav.children().length).toBe(7);
   });
 });

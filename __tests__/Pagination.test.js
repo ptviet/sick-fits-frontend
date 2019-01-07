@@ -43,7 +43,7 @@ describe('<Pagination/>', () => {
 
   it('should render pagination for 18 items', async () => {
     wrapper = mount(
-      <MockedProvider mocks={makeMocks(18)}>
+      <MockedProvider mocks={makeMocks(30)}>
         <Pagination page={1} />
       </MockedProvider>
     );
@@ -58,7 +58,7 @@ describe('<Pagination/>', () => {
 
   it('should disable prev button on first page', async () => {
     wrapper = mount(
-      <MockedProvider mocks={makeMocks(18)}>
+      <MockedProvider mocks={makeMocks(30)}>
         <Pagination page={1} />
       </MockedProvider>
     );
@@ -70,7 +70,7 @@ describe('<Pagination/>', () => {
 
   it('should disable next button on last page', async () => {
     wrapper = mount(
-      <MockedProvider mocks={makeMocks(18)}>
+      <MockedProvider mocks={makeMocks(30)}>
         <Pagination page={5} />
       </MockedProvider>
     );
@@ -82,7 +82,7 @@ describe('<Pagination/>', () => {
 
   it('should enable all buttons on a middle page', async () => {
     wrapper = mount(
-      <MockedProvider mocks={makeMocks(18)}>
+      <MockedProvider mocks={makeMocks(30)}>
         <Pagination page={3} />
       </MockedProvider>
     );
