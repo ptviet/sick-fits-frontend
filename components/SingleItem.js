@@ -49,15 +49,17 @@ class SingleItem extends Component {
           if (!data.item) return <p>No Item Found.</p>;
           const { item } = data;
           return (
-            <SingleItemStyles>
-              <Head>
-                <title>Sick Fits | {item.title}</title>
-              </Head>
-              <img src={item.largeImage} alt={item.title} />
-              <div className="details">
-                <h2>{item.title}</h2>
-                <p>{item.description}</p>
-              </div>
+            <>
+              <SingleItemStyles>
+                <Head>
+                  <title>Sick Fits | {item.title}</title>
+                </Head>
+                <img src={item.largeImage} alt={item.title} />
+                <div className="details">
+                  <h2>{item.title}</h2>
+                  <p>{item.description}</p>
+                </div>
+              </SingleItemStyles>
               <div className="buttonList">
                 <Link
                   href={{
@@ -70,7 +72,7 @@ class SingleItem extends Component {
                 <AddToCart id={item.id} />
                 <DeleteItem id={item.id}>Delete ❌</DeleteItem>
               </div>
-            </SingleItemStyles>
+            </>
           );
         }}
       </Query>
