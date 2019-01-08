@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Router from 'next/router';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import PropTypes from 'prop-types';
+import User from './User';
 import ErrorMessage from './ErrorMessage';
 import Table from './styles/Table';
 import SickButton from './styles/SickButton';
@@ -38,36 +40,58 @@ const possiblePermissions = [
 ];
 
 const Permission = props => (
-  <Query query={ALL_USER_QUERY}>
-    {({ data, error, loading }) => {
+  <User>
+    {({ data: { me }, loading }) => {
+      let matchedPermissions;
+      if (me) {
+        matchedPermissions = me.permissions.filter(myPermission =>
+          ['PERMISSIONUPDATE', 'ADMIN'].includes(myPermission)
+        );
+      }
       if (loading)
         return (
           <div>
             <p>Loading...</p>
           </div>
         );
-      if (error) return <ErrorMessage error={error} />;
+      if (matchedPermissions.length === 0)
+        Router.push({
+          pathname: '/'
+        });
       return (
-        <Table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              {possiblePermissions.map(permission => (
-                <th key={permission}>{permission}</th>
-              ))}
-              <th>⬇️</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.users.map(user => (
-              <UserInfo key={user.id} user={user} />
-            ))}
-          </tbody>
-        </Table>
+        <Query query={ALL_USER_QUERY}>
+          {({ data, error, loading }) => {
+            if (loading)
+              return (
+                <div>
+                  <p>Loading...</p>
+                </div>
+              );
+            if (error) return <ErrorMessage error={error} />;
+            return (
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    {possiblePermissions.map(permission => (
+                      <th key={permission}>{permission}</th>
+                    ))}
+                    <th>⬇️</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.users.map(user => (
+                    <UserInfo key={user.id} user={user} />
+                  ))}
+                </tbody>
+              </Table>
+            );
+          }}
+        </Query>
       );
     }}
-  </Query>
+  </User>
 );
 
 class UserInfo extends Component {
