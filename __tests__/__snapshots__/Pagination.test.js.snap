@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Pagination/> should render pagination for 18 items 1`] = `
+exports[`<Pagination/> should render pagination for 30 items 1`] = `
 <PaginationStyles>
   <div
     className="PaginationStyles-aduuar-0 ewJsCc"

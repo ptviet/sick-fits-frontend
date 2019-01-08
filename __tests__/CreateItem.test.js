@@ -4,6 +4,8 @@ import toJson from 'enzyme-to-json';
 import wait from 'waait';
 import Router from 'next/router';
 import CreateItem, { CREATE_ITEM_MUTATION } from '../components/CreateItem';
+import { ALL_ITEMS_QUERY } from '../components/Items';
+import { PAGINATION_QUERY } from '../components/Pagination';
 import { fakeItem } from '../lib/testUtils';
 
 Router.router = { push: jest.fn() };
@@ -37,6 +39,45 @@ const mocks = [
         createItem: {
           id: item.id,
           __typename: 'Item'
+        }
+      }
+    }
+  },
+  {
+    // when
+    request: {
+      query: ALL_ITEMS_QUERY,
+      variables: {
+        first: 6,
+        skip: 0
+      }
+    },
+    // then
+    result: {
+      data: {
+        items: [
+          fakeItem(),
+          fakeItem(),
+          fakeItem(),
+          fakeItem(),
+          fakeItem(),
+          fakeItem()
+        ]
+      }
+    }
+  },
+  {
+    // when
+    request: { query: PAGINATION_QUERY },
+    // then
+    result: {
+      data: {
+        itemsConnection: {
+          __typename: 'aggregate',
+          aggregate: {
+            __typename: 'count',
+            count: 6
+          }
         }
       }
     }

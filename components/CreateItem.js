@@ -6,6 +6,7 @@ import Form from './styles/Form';
 import ErrorMessage from './ErrorMessage';
 // import { CLOUDINARY } from '../config';
 import { ALL_ITEMS_QUERY } from './Items';
+import { PAGINATION_QUERY } from './Pagination';
 
 const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
@@ -100,7 +101,10 @@ class CreateItem extends Component {
       <Mutation
         mutation={CREATE_ITEM_MUTATION}
         variables={this.state}
-        refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
+        refetchQueries={[
+          { query: ALL_ITEMS_QUERY },
+          { query: PAGINATION_QUERY }
+        ]}
       >
         {(createItem, { loading, error }) => (
           <Form onSubmit={e => this.onSubmit(e, createItem)}>
