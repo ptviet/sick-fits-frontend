@@ -103,3 +103,4 @@ class OrderList extends Component {
 }
 
 export default OrderList;
+export { USER_ORDERS_QUERY };
