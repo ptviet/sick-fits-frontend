@@ -43,8 +43,7 @@ const Nav = () => (
                     My Cart
                     <CartCount
                       count={me.cart.reduce(
-                        (total, cartItem) => total + cartItem.quantity,
-                        0
+                        (total, cartItem) => total + cartItem.quantity
                       )}
                     />
                   </button>
