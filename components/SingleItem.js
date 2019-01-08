@@ -4,6 +4,8 @@ import gql from 'graphql-tag';
 import styled from 'styled-components';
 import Head from 'next/head';
 import Link from 'next/link';
+import formatMoney from '../lib/formatMoney';
+import PriceTag from './styles/PriceTag';
 import ErrorMessage from './ErrorMessage';
 import DeleteItem from './DeleteItem';
 import AddToCart from './AddToCart';
@@ -84,6 +86,7 @@ class SingleItem extends Component {
                 <img src={item.largeImage} alt={item.title} />
                 <div className="details">
                   <h2>{item.title}</h2>
+                  <PriceTag>{formatMoney(item.price)}</PriceTag>
                   <p>{item.description}</p>
                 </div>
               </SingleItemStyles>
