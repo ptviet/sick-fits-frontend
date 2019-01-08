@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
-import User, { CURRENT_USER_QUERY } from './User';
+import User from './User';
 import SignUp from './SignUp';
 import SignIn from './SignIn';
 import RequestResetPassword from './RequestResetPassword';
