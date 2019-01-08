@@ -50,7 +50,7 @@ const CartCount = ({ count }) => (
         key={count}
         timeout={{ enter: 500, exit: 500 }}
       >
-        <Dot>{count}</Dot>
+        <Dot>{count > 0 && count}</Dot>
       </CSSTransition>
     </TransitionGroup>
   </AnimationStyles>
