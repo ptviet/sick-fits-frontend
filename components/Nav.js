@@ -29,7 +29,7 @@ const Nav = () => (
               <Link href="/orders">
                 <a>Orders</a>
               </Link>
-              {matchedPermissions.length && (
+              {matchedPermissions.length > 0 && (
                 <Link href="/permission">
                   <a>Permissions</a>
                 </Link>
